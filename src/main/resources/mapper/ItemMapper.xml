@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myfruit.pms.mapper.ItemMapper">
+    <insert id="insertItem" parameterType="com.myfruit.pms.dto.ItemDto">
+        <!-- itemMapper interface itemDto를 insert parameter type ItemDto를 전달-->
+        insert into items (name) values (#{item});
+        <!-- parameter type ItemDto 전달받아 #item으로 출력 -->
+    </insert>
+</mapper>
+

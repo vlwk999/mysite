@@ -20,7 +20,7 @@ public class ItemClass {
 
     @PostMapping
     public void createItem(@RequestBody ItemDto itemDto){
-        //@RequestBody itemDto가
+        //@RequestBody itemDto 가
          System.out.println(itemDto.getItem());
          itemMapper.insertItem(itemDto);
          //여기 itemDto 로 전달 그리고 itemMapper 인터페이스에 itemDto 로 전달
