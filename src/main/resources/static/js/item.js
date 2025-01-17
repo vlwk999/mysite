@@ -6,6 +6,8 @@ document.getElementById('itemForm').addEventListener('submit',function(event) {
     }
 
     // fetch (요청주소, 요청내용)
+    // 성공
+    // 실패
     fetch("/items", {
         method: 'post',
         headers: {'Content-Type' : 'application/json'},
@@ -15,14 +17,12 @@ document.getElementById('itemForm').addEventListener('submit',function(event) {
             alert('아이템이 성공적으로 생성되었습니다.');
             document.getElementById('itemForm').reset();
         } else {
-            alert('메시지 생성에 실패했습니다.');
+            alert('아이템 생성에 실패했습니다.');
         }
-    })
-    .catch(error => {
+    }).catch(error => {
         console.error('Error:', error);
         alert('오류가 발생했습니다.');
-    }
-    );
+    });
 
 });
 
