@@ -33,7 +33,7 @@ public class ItemService {
         return itemMapper.getItems();
     }
 
-    public void modify(ItemDto itemDto) {
+    public void modifyItem(ItemDto itemDto) {
         itemMapper.updateItem(itemDto);
     }
 
