@@ -14,11 +14,11 @@
     </select>
 
     <select id="getItems" resultType="com.myfruit.pms.dto.ItemDto">
-        select id, name as item from items order by id limit 3;
+        select id, name as item from items order by id limit 10;
     </select>
 
     <update id="updateItem" parameterType="com.myfruit.pms.dto.ItemDto">
-        update items set name = "#{item}" where id = #{id} ;
+        update items set name = #{item} where id = #{id} ;
     </update>
 
     <delete id="deleteItem" >

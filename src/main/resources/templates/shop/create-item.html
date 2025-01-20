@@ -8,12 +8,11 @@
 <body>
 <main layout:fragment="content">
 <h1>새 아이템</h1>
-<form id="itemForm" th:action ="@{/items}" method="post">
-  <label for="item_id">아이템(과일): </label>
-  <input type="text" id="item_id" name="item" required>
-  <button type="submit">아이템 등록</button>
-</form>
-<script th:src ="@{/js/item.js}"></script>
+    <form id="itemForm" th:action ="@{/items}" method="post">
+      <label for="item_id">아이템(과일): </label>
+      <input type="text" id="item_id" name="item" required>
+      <button type="submit">아이템 등록</button>
+    </form>
 </main>
 <th:block layout:fragment>
     <script th:src="@{/js/items.js}"></script>

@@ -37,7 +37,7 @@ public class ItemService {
         itemMapper.updateItem(itemDto);
     }
 
-    public void remove(int id){
+    public void removeItem(int id){
         itemMapper.deleteItem(id);
     }
 

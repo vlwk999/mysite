@@ -79,6 +79,11 @@ public class ItemController {
     }
 
 
+    @GetMapping("/{id}/remove")
+    public String removeItem(@PathVariable("id") int id) {
+        itemService.removeItem(id);
+        return "redirect:/items";
+    }
 
 
 

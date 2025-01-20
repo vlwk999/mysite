@@ -3,8 +3,7 @@ document.getElementById('itemForm').addEventListener('submit',function(event) {
 
     const item = {
         id: document.getElementById('item_id').value,
-
-        item : document.getElementById('item_id').value,
+        item : document.getElementById('item_name').value,
     }
 
     // fetch (요청주소, 요청내용)

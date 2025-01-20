@@ -3,7 +3,6 @@
       xmlns:layout="http://www.ultraq.net.nx/thymeleaf/layout"
       layout:decorate="~{layout/base}">
 <head>
-    <meta charset="UTF-8">
     <title>상세보기</title>
 </head>
 <body>
@@ -12,8 +11,9 @@
 <ul>
   <li>id: <span th:text="${item.id}"></span></li>
   <li>name: <span th:text="${item.item}"></span></li>
+  <li><a th:href="@{/items/{id}/modify(id=${item.id})}">수정</a></li>
+  <li><a th:href="@{/items/{id}/remove(id=${item.id})}">삭제</a></li>
 </ul>
-    <a th:href="@{/items/{id}/modify(id=${item.id})}">수정하기</a>
 </main>
 </body>
 </html>
