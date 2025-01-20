@@ -55,6 +55,28 @@ public class ItemController {
         return "shop/list";
     }
 
+    // modify or edit 사용
+    @GetMapping("/{id}/modify")
+    public String getItem2(@PathVariable("id") int id, Model model){
+        // Model 객체로, 컨트롤러에서 뷰로 데이터를 전달
+        try {
+            ItemDto itemDto = itemService.getItem(id); // id를 사용해 아이템 정보를 가져옴
+            model.addAttribute("item", itemDto); // 아이템 정보를 모델에 추가
+        }catch (IllegalStateException e){
+            model.addAttribute("message",e.getMessage());
+            return "common/error/404";
+        }
+        // model.addAttribute 모델에 데이터를 추가하는 메소드 ->  데이터를 뷰로 전달
+        return "shop/modify"; // shop / detail 뷰를 반환
+    }
+
+    @PostMapping("/{id}/modify")
+    @ResponseBody
+    public void modifyItem(@RequestBody ItemDto itemDto){
+        System.out.println(itemDto.getItem());
+        itemService.modifyItem(itemDto);
+
+    }
 
 
 
@@ -64,8 +86,9 @@ public class ItemController {
     // 생성 페이지 GET / items /create
     // 생성 POST / items
     // 상세보기 GET / items /{id}
+    // 수정페이지 GET / items/{id}/ modify
     // 수정 POST / items /{id}
-    // 삭제 GET / items/{id}/delete
+    // 삭제 GET / items/{id}/ remove
     // 목록 Get /items
 
     // 생성 페이지 GET / items /create
