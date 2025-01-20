@@ -27,10 +27,9 @@ public class ItemController {
     @PostMapping
     @ResponseBody
     public void createItem(@RequestBody ItemDto itemDto){
-        //@RequestBody itemDto 가
          System.out.println(itemDto.getItem());
          itemService.createItem(itemDto);
-         //여기 itemDto 로 전달 그리고 itemMapper 인터페이스에 itemDto 로 전달
+
     }
 
     @GetMapping("/{id}")
