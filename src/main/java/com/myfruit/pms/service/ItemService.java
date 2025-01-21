@@ -29,8 +29,12 @@ public class ItemService {
         );
     }
 
-    public List<ItemDto> getItems() {
-        return itemMapper.getItems();
+    public List<ItemDto> getItems( int page, int limit) {
+        int offset = (page -1) * limit;
+        // 갯수가 size 인 item 목록
+        List <ItemDto> items = itemMapper.getItems(limit, offset);
+
+        return items;
     }
 
     public void modifyItem(ItemDto itemDto) {

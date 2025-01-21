@@ -46,10 +46,12 @@ public class ItemController {
         return "shop/detail"; // shop / detail 뷰를 반환
     }
 
+    // 요청 URL 형식 : /items?page =1&size=10
     @GetMapping
-    public String getItems(Model model) {
-        itemService.getItems();
-        List<ItemDto> items = itemService.getItems();
+    public String getItems(@RequestParam("page")int page,
+                           @RequestParam("limit") int limit,
+                           Model model) {
+        List<ItemDto> items = itemService.getItems(page,limit);
         model.addAttribute("items",items);
 
         return "shop/list";
