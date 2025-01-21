@@ -17,6 +17,11 @@
         select id, name as item from items order by id limit #{limit} offset #{offset};
     </select>
 
+    <select id="countTotal" resultType="Integer">
+        select count(*) from items;
+    </select>
+
+
     <update id="updateItem" parameterType="com.myfruit.pms.dto.ItemDto">
         update items set name = #{item} where id = #{id} ;
     </update>

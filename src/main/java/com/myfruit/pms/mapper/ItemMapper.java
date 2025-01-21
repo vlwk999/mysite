@@ -16,6 +16,7 @@ public interface ItemMapper { //인터페이스의 기본은 public
     Optional<ItemDto> getItemById (int id);
     // 1개이상 나오는거는 list
     List<ItemDto> getItems(@Param("limit") int limit, @Param("offset")int offset);
+    int countTotal();
     void updateItem(ItemDto itemDto); // 내용 변경
     void deleteItem(int id);
 }

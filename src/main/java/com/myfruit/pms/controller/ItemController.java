@@ -1,6 +1,7 @@
 package com.myfruit.pms.controller;
 
 import com.myfruit.pms.dto.ItemDto;
+import com.myfruit.pms.dto.PageDto;
 import com.myfruit.pms.mapper.ItemMapper;
 import com.myfruit.pms.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -48,11 +49,11 @@ public class ItemController {
 
     // 요청 URL 형식 : /items?page =1&size=10
     @GetMapping
-    public String getItems(@RequestParam("page")int page,
-                           @RequestParam("limit") int limit,
+    public String getItems(@RequestParam(name = "page", defaultValue = "1")int page,
+                           @RequestParam(name = "limit", defaultValue = "10") int limit,
                            Model model) {
-        List<ItemDto> items = itemService.getItems(page,limit);
-        model.addAttribute("items",items);
+        PageDto pageDto = itemService.getItems(page,limit);
+        model.addAttribute("pageDto",pageDto);
 
         return "shop/list";
     }
