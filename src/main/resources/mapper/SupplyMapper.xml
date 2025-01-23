@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.myfruit.pms.mapper.SupplyMapper">
+    <insert id="insertSupply" parameterType="com.myfruit.pms.dto.SupplyDto"
+            useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO supply (name, contact1, contact2, business_number)
+        VALUES (#{name}, #{contact1}, #{contact2}, #{businessNumber});
+    </insert>
+
+    <select id="getSupplyById" resultType="com.myfruit.pms.dto.SupplyDto">
+        SELECT name, contact1, contact2, business_number FROM supply WHERE id = #{id};
+    </select>
+
+    <select id="getSupplys" resultType="com.myfruit.pms.dto.SupplyDto">
+        SELECT name, contact1, contact2, business_number
+        FROM supply order by id limit #{limit} offset #{offset};
+    </select>
+
+    <select id="countTotal" resultType="Integer">
+        SELECT count(*) FROM supply;
+    </select>
+
+    <update id="updateSupply" parameterType="com.myfruit.pms.dto.SupplyDto">
+        update supply set name = #{name},
+        contact1 = #{contact1},
+        contact2 = #{contact2},
+        business_number = #{businessNumber}
+        where id = #{id};
+    </update>
+
+    <delete id="deleteSupply">
+        delete from supply where id = #{id};
+    </delete>
+</mapper>
