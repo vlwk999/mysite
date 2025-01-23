@@ -26,6 +26,10 @@ document.getElementById('item_id').addEventListener('input', function(e) {
     spaceError.style.display = hasWhiteSpace(value) ? 'block' : 'none';
     specialCharError.style.display = hasSpecialChar(value) ? 'block' : 'none';
     startWithNumberError.style.display = startWithNumber(value) ? 'block' : 'none';
+
+    // 입력시 서버 오류 메세지는 감추기
+    document.getElementById('itemError').style.display='none';
+
 })
 
 
@@ -35,6 +39,15 @@ document.getElementById('itemForm').addEventListener('submit',function(event) {
     const item = {
         item : document.getElementById('item_id').value,
     }
+
+     if (! hasWhiteSpace(item.item) &&
+            ! hasSpecialChar(item.item) &&
+            ! startWithNumber(item.item)) {
+                alert('서버로 전송한다.');
+     }else{
+        alert('입력값을 다시 확인해주세요.');
+     }
+
 
     // fetch (요청주소, 요청내용)
     // 성공
@@ -49,6 +62,15 @@ document.getElementById('itemForm').addEventListener('submit',function(event) {
             document.getElementById('itemForm').reset();
         } else {
             alert('아이템 생성에 실패했습니다.');
+            response.json().then(errorMap => {
+                Object.entries(errorMap).forEach(([field, messages]) => {
+                    const errorEl = document.getElementById(`${field}Error`);
+                    if (errorEl) {
+                        errorEl.style.display = 'block';
+                        errorEl.innerText = messages.join('\n');
+                    }
+                });
+            });
         }
     }).catch(error => {
         console.error('Error:', error);

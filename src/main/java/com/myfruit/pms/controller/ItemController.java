@@ -4,13 +4,19 @@ import com.myfruit.pms.dto.ItemDto;
 import com.myfruit.pms.dto.PageDto;
 import com.myfruit.pms.mapper.ItemMapper;
 import com.myfruit.pms.service.ItemService;
-import org.springframework.beans.factory.annotation.Autowired;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.
 import org.springframework.boot.Banner;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @RequestMapping("/items")
@@ -27,10 +33,27 @@ public class ItemController {
 
     @PostMapping
     @ResponseBody
-    public void createItem(@RequestBody ItemDto itemDto){
-         System.out.println(itemDto.getItem());
-         itemService.createItem(itemDto);
+    public ResponseEntity<?> createItem(@Valid @RequestBody ItemDto itemDto, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            Map<String, List<String>> errorMap = new HashMap<>();
+            // BindingResult에서 에러들을 순회
+            bindingResult.getFieldErrors().forEach(error -> {
+                // 에러가 발생한 필드명 추출
+                String field = error.getField();
+                // 해당 필드의 에러 메시지 추출
+                String message = error.getDefaultMessage();
 
+                // errorMap에 필드별 에러메시지 리스트 추가
+                // computeIfAbsent: 해당 key가 없으면 새 ArrayList 생성
+                // 있으면 기존 리스트에 메시지 추가
+                // 참고: https://tinyurl.com/mrxbfpz8
+                errorMap.computeIfAbsent(field, k -> new ArrayList<>()).add(message);
+            });
+            return ResponseEntity.badRequest().body(errorMap);
+        }
+        System.out.println(itemDto.getItem());
+        itemService.createItem(itemDto);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
